@@ -4,12 +4,11 @@ MAINTAINER playniuniu@gmail.com
 ENV SS_VERSION 3.0.3
 ENV SS_URL https://github.com/shadowsocks/shadowsocks-libev/releases/download/v$SS_VERSION/shadowsocks-libev-$SS_VERSION.tar.gz
 ENV SS_DIR shadowsocks-libev-$SS_VERSION
-ENV SS_DEPENDENCE pcre
 ENV SS_BUILD autoconf build-base curl libev-dev libtool linux-headers udns-dev libsodium-dev mbedtls-dev pcre-dev tar
 ENV SS_PORT 8388
 
 RUN set -ex \
-    && apk add --no-cache --update $SS_DEPENDENCE $SS_BUILD \
+    && apk add --no-cache --update $SS_BUILD \
     && curl -sSL $SS_URL | tar -zxv \
     && cd $SS_DIR \
     && ./configure --prefix=/usr --disable-documentation \
