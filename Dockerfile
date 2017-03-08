@@ -1,20 +1,27 @@
 FROM alpine:latest
 MAINTAINER playniuniu@gmail.com
 
-ENV SS_VERSION 2.5.6
-ENV SS_URL https://github.com/shadowsocks/shadowsocks-libev/archive/v$SS_VERSION.tar.gz
+ENV SS_VERSION 3.0.3
+ENV SS_URL https://github.com/shadowsocks/shadowsocks-libev/releases/download/v$SS_VERSION/shadowsocks-libev-$SS_VERSION.tar.gz
 ENV SS_DIR shadowsocks-libev-$SS_VERSION
 ENV SS_DEPENDENCE pcre
-ENV SS_BUILD curl make gcc libc-dev autoconf libtool linux-headers openssl-dev asciidoc xmlto pcre-dev
+ENV SS_BUILD autoconf build-base curl libev-dev libtool linux-headers udns-dev libsodium-dev mbedtls-dev pcre-dev tar
 ENV SS_PORT 8388
 
 RUN set -ex \
-    && apk --no-cache --update add $SS_DEPENDENCE $SS_BUILD \
+    && apk add --no-cache --update $SS_DEPENDENCE $SS_BUILD \
     && curl -sSL $SS_URL | tar -zxv \
     && cd $SS_DIR \
-    && ./configure \
+    && ./configure --prefix=/usr --disable-documentation \
     && make install \
     && cd .. \
+    && runDeps="$( \
+       scanelf --needed --nobanner /usr/bin/ss-* \
+       | awk '{ gsub(/,/, "\nso:", $2); print "so:" $2 }' \
+       | xargs -r apk info --installed \
+       | sort -u \
+    )" \
+    && apk add --no-cache $runDeps \
     && rm -rf $SS_DIR \
     && apk del --purge $SS_BUILD \
     && rm -r /var/cache/apk/*
