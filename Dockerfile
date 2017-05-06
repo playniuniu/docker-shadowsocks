@@ -1,7 +1,7 @@
 FROM alpine:latest
 MAINTAINER playniuniu@gmail.com
 
-ENV SS_VERSION 3.0.5
+ENV SS_VERSION 3.0.6
 ENV SS_URL https://github.com/shadowsocks/shadowsocks-libev/releases/download/v$SS_VERSION/shadowsocks-libev-$SS_VERSION.tar.gz
 ENV SS_DIR shadowsocks-libev-$SS_VERSION
 ENV SS_BUILD autoconf build-base curl libev-dev libtool linux-headers udns-dev libsodium-dev mbedtls-dev pcre-dev tar
