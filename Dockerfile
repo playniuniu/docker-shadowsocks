@@ -1,11 +1,11 @@
 FROM alpine:latest
 MAINTAINER playniuniu@gmail.com
 
-ENV SS_VERSION 3.0.8
+ENV SS_VERSION 3.1.0
 ENV SS_URL https://github.com/shadowsocks/shadowsocks-libev/releases/download/v$SS_VERSION/shadowsocks-libev-$SS_VERSION.tar.gz
 ENV SS_DIR shadowsocks-libev-$SS_VERSION
 ENV SS_BUILD autoconf build-base curl libev-dev libtool linux-headers udns-dev libsodium-dev mbedtls-dev pcre-dev tar
-ENV SS_PORT 8388
+ENV SS_PORT 9999
 
 RUN set -ex \
     && apk add --no-cache --update $SS_BUILD \
