@@ -20,7 +20,7 @@ RUN set -ex \
        | xargs -r apk info --installed \
        | sort -u \
     )" \
-    && apk add --no-cache $runDeps \
+    && apk add --no-cache $runDeps rng-tools \
     && rm -rf $SS_DIR \
     && apk del --purge $SS_BUILD \
     && rm -r /var/cache/apk/*
