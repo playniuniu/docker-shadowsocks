@@ -22,8 +22,7 @@ RUN set -ex \
     )" \
     && apk add --no-cache $runDeps rng-tools \
     && rm -rf $SS_DIR \
-    && apk del --purge $SS_BUILD \
-    && rm -r /var/cache/apk/*
+    && apk del --purge $SS_BUILD
 
 EXPOSE $SS_PORT/tcp
 EXPOSE $SS_PORT/udp
