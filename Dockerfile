@@ -28,4 +28,4 @@ EXPOSE $SS_PORT/tcp
 EXPOSE $SS_PORT/udp
 
 ENTRYPOINT ["ss-server", "-c", "/etc/shadowsocks.json"]
-CMD ["--fast-open", "-u", "-d", "8.8.8.8"]
+CMD ["-u", "-d", "8.8.8.8"]
